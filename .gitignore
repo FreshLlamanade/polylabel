@@ -1,3 +1,5 @@
 mason_packages
 node_modules
 build
+.idea
+package-lock.json
