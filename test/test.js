@@ -1,13 +1,15 @@
 'use strict';
 
-var polylabel = require('../');
-var test = require('tape').test;
+const polylabel = require('../');
+const test = require('tape').test;
 
-var water1 = require('./fixtures/water1.json');
-var water2 = require('./fixtures/water2.json');
+const water1 = require('./fixtures/water1.json');
+const water2 = require('./fixtures/water2.json');
 
 test('finds pole of inaccessibility for water1 and precision 1', function (t) {
-    var p = polylabel(water1, 1);
+    console.time('Execution time');
+    let p = polylabel(water1, 1);
+    console.timeEnd('Execution time');
     t.same(p, Object.assign([3865.85009765625, 2124.87841796875], {
         distance: 288.8493574779127
     }));
@@ -15,7 +17,9 @@ test('finds pole of inaccessibility for water1 and precision 1', function (t) {
 });
 
 test('finds pole of inaccessibility for water1 and precision 50', function (t) {
-    var p = polylabel(water1, 50);
+    console.time('Execution time');
+    let p = polylabel(water1, 50);
+    console.timeEnd('Execution time');
     t.same(p, Object.assign([3854.296875, 2123.828125], {
         distance: 278.5795872381558
     }));
@@ -23,7 +27,9 @@ test('finds pole of inaccessibility for water1 and precision 50', function (t) {
 });
 
 test('finds pole of inaccessibility for water2 and default precision 1', function (t) {
-    var p = polylabel(water2);
+    console.time('Execution time');
+    let p = polylabel(water2);
+    console.timeEnd('Execution time');
     t.same(p, Object.assign([3263.5, 3263.5], {
         distance: 960.5
     }));
@@ -31,12 +37,16 @@ test('finds pole of inaccessibility for water2 and default precision 1', functio
 });
 
 test('works on degenerate polygons', function (t) {
-    var p = polylabel([[[0, 0], [1, 0], [2, 0], [0, 0]]]);
+    console.time('Execution time');
+    let p = polylabel([[[0, 0], [1, 0], [2, 0], [0, 0]]]);
+    console.timeEnd('Execution time');
     t.same(p, Object.assign([0, 0], {
         distance: 0
     }));
 
+    console.time('Execution time');
     p = polylabel([[[0, 0], [1, 0], [1, 1], [1, 0], [0, 0]]]);
+    console.timeEnd('Execution time');
     t.same(p, Object.assign([0, 0], {
         distance: 0
     }));
